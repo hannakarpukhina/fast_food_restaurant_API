@@ -1,25 +1,17 @@
 from flask import Blueprint
-from controllers.categories_controller import (
+from controllers.food_order_controller import (
     insert_categories,
     display_categories,
     display_category_name,
-)
-from controllers.menu_items_controller import (
     insert_menu_item,
     display_menu_items,
     display_menu_item_name,
-)
-from controllers.customers_controller import (
     insert_customer,
     display_customers,
     display_customer_name,
-)
-from controllers.employees_controller import (
     insert_employee,
     display_employees,
     display_employee_name,
-)
-from controllers.orders_controller import (
     insert_order,
     display_orders,
     display_order_details,
@@ -35,8 +27,8 @@ def index():
 
 blueprint.route("/", methods=["GET"])(index)
 blueprint.route("/categories", methods=["POST"])(insert_categories)
-blueprint.route("/categories/<id>", methods=["GET"])(display_category_name)
 blueprint.route("/categories", methods=["GET"])(display_categories)
+blueprint.route("/categories/<id>", methods=["GET"])(display_category_name)
 
 blueprint.route("/menu_items", methods=["POST"])(insert_menu_item)
 blueprint.route("/menu_items", methods=["GET"])(display_menu_items)

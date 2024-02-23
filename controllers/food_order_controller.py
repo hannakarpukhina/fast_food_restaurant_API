@@ -1,3 +1,8 @@
+from models.category import Category
+from models.customer import Customer
+from models.employee import Employee
+from models.menu_item import MenuItem
+from models.order import Order
 from models.db_object import DBObject
 from services.db_service import DBService
 from flask import request
@@ -45,7 +50,6 @@ def get_element_by_id(model: DBObject, id):
 
 
 def get_element_by_query(model: DBObject):
-
     param_list = list(request.args.items())
     error_message = ""
     incorrect_param = []
@@ -70,3 +74,63 @@ def get_element_by_query(model: DBObject):
         result["warning"] = error_message
 
     return result
+
+
+def display_categories():
+    return get_element_by_query(Category)
+
+
+def insert_categories():
+    return add_element_from_json(Category)
+
+
+def display_category_name(id):
+    return get_element_by_id(Category, id)
+
+
+def display_customers():
+    return get_element_by_query(Customer)
+
+
+def insert_customer():
+    return add_element_from_json(Customer)
+
+
+def display_customer_name(id):
+    return get_element_by_id(Customer, id)
+
+
+def display_employees():
+    return get_element_by_query(Employee)
+
+
+def insert_employee():
+    return add_element_from_json(Employee)
+
+
+def display_employee_name(id):
+    return get_element_by_id(Employee, id)
+
+
+def display_menu_items():
+    return get_element_by_query(MenuItem)
+
+
+def insert_menu_item():
+    return add_element_from_json(MenuItem)
+
+
+def display_menu_item_name(id):
+    return get_element_by_id(MenuItem, id)
+
+
+def display_orders():
+    return get_element_by_query(Order)
+
+
+def insert_order():
+    return add_element_from_json(Order)
+
+
+def display_order_details(id):
+    return get_element_by_id(Order, id)
