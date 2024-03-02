@@ -14,15 +14,13 @@ class DBObject(Model):
     def get_attribute_names(cls):
         column_list = []
         for member in inspect.getmembers(cls):
-            if isinstance(
-                member[1], InstrumentedAttribute
-            ):  # and member[1].primary_key==False:
+            if isinstance(member[1], InstrumentedAttribute):
                 column_list.append(member[0])
         return column_list
 
-    def __repr__(self):
-        output = {}
-        column_names = self.get_attribute_names()
-        for column_name in column_names:
-            output[column_name] = getattr(self, column_name)
-        return json.dumps(output)
+    # def __repr__(self):
+    #     output = {}
+    #     column_names = self.get_attribute_names()
+    #     for column_name in column_names:
+    #         output[column_name] = getattr(self, column_name)
+    #     return json.dumps(output)

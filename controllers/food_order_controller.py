@@ -24,7 +24,7 @@ def add_element_from_json(model: DBObject):
             for json_param in request_json:
                 if json_param not in model.get_attribute_names():
                     incorected_attr = json_param
-                    raise KeyError(f'attribute "{incorected_attr}" is not supported')
+                    raise KeyError(f'Attribute "{incorected_attr}" is not supported')
 
         column_values = {}
         for column in model.get_attribute_names():
@@ -34,7 +34,8 @@ def add_element_from_json(model: DBObject):
         instance = model(**column_values)
         db_service.insert_object_into_db(instance)
 
-        return "new elements is added"
+        result = {"result": instance}
+        return result
 
     except exc.IntegrityError as e:
         return str(e.orig).split(":")[-1].replace("\n", "").strip(), 409
@@ -76,7 +77,14 @@ def get_element_by_query(model: DBObject):
     return result
 
 
-def display_categories():
+def delete_element_by_id(model: DBObject, id):
+    element = db_service.get_object_query_from_db(model).get_or_404(id)
+    db_service.delete_object_from_db(element)
+    result = {"result": element}
+    return f"Element with id = {id} was successfully deleted"
+
+
+def get_categories():
     return get_element_by_query(Category)
 
 
@@ -84,53 +92,73 @@ def insert_categories():
     return add_element_from_json(Category)
 
 
-def display_category_name(id):
+def get_category_by_id(id):
     return get_element_by_id(Category, id)
 
 
-def display_customers():
+def delete_category_by_id(id):
+    return delete_element_by_id(Category, id)
+
+
+def get_customers():
     return get_element_by_query(Customer)
 
 
-def insert_customer():
+def insert_customers():
     return add_element_from_json(Customer)
 
 
-def display_customer_name(id):
+def get_customer_by_id(id):
     return get_element_by_id(Customer, id)
 
 
-def display_employees():
+def delete_customer_by_id(id):
+    return delete_element_by_id(Customer, id)
+
+
+def get_employees():
     return get_element_by_query(Employee)
 
 
-def insert_employee():
+def insert_employees():
     return add_element_from_json(Employee)
 
 
-def display_employee_name(id):
+def get_employee_by_id(id):
     return get_element_by_id(Employee, id)
 
 
-def display_menu_items():
+def delete_employee_by_id(id):
+    return delete_element_by_id(Employee, id)
+
+
+def get_menu_items():
     return get_element_by_query(MenuItem)
 
 
-def insert_menu_item():
+def insert_menu_items():
     return add_element_from_json(MenuItem)
 
 
-def display_menu_item_name(id):
+def get_menu_item_by_id(id):
     return get_element_by_id(MenuItem, id)
 
 
-def display_orders():
+def delete_menu_item_by_id(id):
+    return delete_element_by_id(MenuItem, id)
+
+
+def get_orders():
     return get_element_by_query(Order)
 
 
-def insert_order():
+def insert_orders():
     return add_element_from_json(Order)
 
 
-def display_order_details(id):
+def get_order_by_id(id):
     return get_element_by_id(Order, id)
+
+
+def delete_order_by_id(id):
+    return delete_element_by_id(Order, id)

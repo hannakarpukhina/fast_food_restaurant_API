@@ -28,6 +28,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx__category__category_name
 CREATE TABLE IF NOT EXISTS customer
 (
     customer_id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
+    first_name character varying(100) NOT NULL,
     last_name character varying(100) NOT NULL,
     email character varying(100) NOT NULL,
     CONSTRAINT pk__customer__customer_id PRIMARY KEY (customer_id)
@@ -40,6 +41,7 @@ CREATE TABLE IF NOT EXISTS customer
 CREATE TABLE IF NOT EXISTS employee
 (
     employee_id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
+    first_name character varying(100) NOT NULL,
     last_name character varying(100) NOT NULL,
     email character varying(100) NOT NULL,
     phone character varying(100) NOT NULL,

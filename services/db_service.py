@@ -23,3 +23,7 @@ class DBService:
 
     def get_object_query_from_db(self, model):
         return self.db.session.query(model)
+    
+    def delete_object_from_db(self, instance):
+        self.db.session.delete(instance)
+        self.db.session.commit()
